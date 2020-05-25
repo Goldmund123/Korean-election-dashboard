@@ -1,0 +1,11 @@
+pandas
+numpy
+./packages/Shapely-1.7.0-cp37-cp37m-win_amd64.whl
+./packages/Fiona-1.8.13-cp37-cp37m-win_amd64.whl
+./packages/GDAL-3.0.4-cp37-cp37m-win_amd64.whl
+./packages/pyproj-2.6.0-cp37-cp37m-win_amd64.whl
+./packages/Rtree-0.9.4-cp37-cp37m-win_amd64.whl
+plotly
+dash
+geopandas
+uwsgi
