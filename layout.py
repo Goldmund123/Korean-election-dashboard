@@ -45,7 +45,7 @@ dashboard1 = html.Div(
                     html.A(
                         html.Img(src='/static/GitHub-Mark-64px.png', width=40, height=40, style={'margin-left': '330px', 'margin-top':'30px'}),
                         id="github",
-                        href='/'
+                        href='https://github.com/Goldmund123/Korean-election-dashboard'
                     ),
                     className="one-third column",
                     id="button",
