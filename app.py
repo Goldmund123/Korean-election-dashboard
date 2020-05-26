@@ -7,8 +7,13 @@ import layout
 from graph import geo_plots, plots
 import pandas as pd
 from config import config
+from flask import Flask
 
-app = dash.Dash(__name__, meta_tags=[{"name": "electionoverview", "content": "width=device-width"}])
+server = Flask(__name__)
+server.secret_key ='test'
+#server.secret_key = os.environ.get('secret_key', 'secret')
+app = dash.Dash(name = __name__, server = server)
+application = app.server
 
 variable_type = config.variable_type
 
@@ -105,4 +110,5 @@ def hist_callback(variables):
 
 # Main
 if __name__ == "__main__":
-    app.run_server(port=8050, debug=False)
+    # app.run_server(port=8050, debug=False)
+    application.run()
