@@ -1,7 +1,6 @@
 import geopandas as gpd
 import pandas as pd
 import json
-# from layout import layout
 from config import config
 import plotly.express as px
 import numpy as np
