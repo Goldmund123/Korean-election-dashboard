@@ -3,6 +3,7 @@ numpy
 plotly
 flask
 flask_caching
+redis
 dash
 geopandas
 uwsgi
