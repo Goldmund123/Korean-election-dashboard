@@ -21,6 +21,7 @@ cache = Cache(app.server, config={
     'CACHE_TYPE': 'redis',
     'CACHE_REDIS_URL': os.environ['REDISCLOUD_URL']
 })
+cache.backends.RedisCache(default_timeout=None)
 
 variable_type = config.variable_type
 
