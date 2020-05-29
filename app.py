@@ -1,4 +1,5 @@
 # Import required libraries
+import os
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
@@ -8,11 +9,18 @@ from graph import geo_plots, plots
 import pandas as pd
 from config import config
 from flask import Flask
+from flask_caching import Cache
 
 server = Flask(__name__)
 server.secret_key ='test'
 #server.secret_key = os.environ.get('secret_key', 'secret')
 app = dash.Dash(name = __name__, server = server)
+
+cache = Cache(app.server, config={
+    # try 'filesystem' if you don't want to setup redis
+    'CACHE_TYPE': 'redis',
+    'CACHE_REDIS_URL': os.environ['REDISCLOUD_URL']
+})
 
 variable_type = config.variable_type
 
@@ -55,6 +63,7 @@ def select_variable_values(available_options):
      Input('metropolitan', 'value'),
      Input('variable', 'value'),
     ])
+@cache.memoize()
 def mapbox_callback(province, metropolitan, target):
     return geo_plots.update_geo_graph(province, metropolitan, target)
 
@@ -76,6 +85,7 @@ def panel_callback(province, metropolitan):
      Input('variable', 'value'),
      Input('highlow', 'value'),
     ])
+@cache.memoize()
 def bar_callback(province, metropolitan, variable, option):
     if option == 'highest':
         return plots.update_bar_top(province, metropolitan, variable)
@@ -95,6 +105,7 @@ def radar_callback(clickData):
     [
      Input('scatter_variables', 'value'),
     ])
+@cache.memoize()
 def scatter_callback(variables):
     return plots.update_scatter(variables[0], variables[1])
 
@@ -104,6 +115,7 @@ def scatter_callback(variables):
     [
      Input('scatter_variables', 'value')
     ])
+@cache.memoize()
 def hist_callback(variables):
     return plots.update_histograms(variables[0], variables[1])
 
