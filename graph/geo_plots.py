@@ -59,7 +59,7 @@ def update_geo_graph(province, metropolitan, target):
                 colorbar={
                         'outlinewidth': 0, 'tickvals': [0.125, 0.375, 0.625, 0.875],
                         'ticktext': parties, 'thickness': 20, 'xanchor': 'right', 'yanchor': 'bottom',
-                        # 'x': 0.845, 'y': 0.12, 
+                        'x': 1.0, 'y': 0.0, 
                         'title': {'text': ''},
                         'len': 0.2, 'bgcolor':'rgba(255,255,255,0.6)'},
                 marker_opacity=0.8, 
@@ -78,7 +78,7 @@ def update_geo_graph(province, metropolitan, target):
                 colorbar={
                         'outlinewidth': 0, 
                         'len':0.4, 'thickness': 30, 'xanchor': 'right', 'yanchor': 'middle',
-                        # 'x':0.885, 'y':0.22, 
+                        'x': 1.0, 'y':0.5, 
                         'title': {'text': ''},
                         'bgcolor':'rgba(255,255,255,0.6)'},
                 marker_opacity=0.8, 
