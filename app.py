@@ -15,11 +15,10 @@ server = Flask(__name__)
 server.secret_key ='test'
 app = dash.Dash(name = __name__, server = server)
 
-backends.RedisCache(default_timeout=None)
-
 cache = Cache(app.server, config={
     # try 'filesystem' if you don't want to setup redis
     'CACHE_TYPE': 'redis',
+    'CACHE_DEFAULT_TIMEOUT': None,
     'CACHE_REDIS_URL': os.environ['REDISCLOUD_URL']
 })
 
