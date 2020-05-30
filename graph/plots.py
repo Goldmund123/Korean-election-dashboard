@@ -42,9 +42,9 @@ def update_bar_top(province, metropolitan, target):
         dff = df_votes_dist[df_votes_dist[target]!=0]
     else:
         if metropolitan == 'All':
-            dff = df_votes_dist[(df_votes_dist['province'].isin(metro_province[province])) & (df_votes_dist[target]!=0)]
+            dff = df_votes_dist[(df_votes_dist['province'].isin(metro_province[province])) & (df_votes_dist[target]!=0.0) & (df_votes_dist[target].notnull())]
         else:
-            dff = df_votes_dist[(df_votes_dist['province']==metropolitan) & (df_votes_dist[target]!=0)]
+            dff = df_votes_dist[(df_votes_dist['province']==metropolitan) & (df_votes_dist[target]!=0.0) & (df_votes_dist[target].notnull())]
 
     if target == 'win_party':
         dff = dff.groupby(['win_party']).count()['district'].reset_index()
@@ -58,7 +58,6 @@ def update_bar_top(province, metropolitan, target):
     else:    
         dff.sort_values(by=[target], ascending=False, inplace=True)
         dff = dff.head(10)
-        dff.sort_values(by=[target], inplace=True)
         color = 'province' if province == 'Korea' else None
         fig = px.bar(dff, x='district', y=target, opacity=0.6, color=color, template='plotly_white')
         fig.update_xaxes(title='District', tickfont=dict(size=9), categoryorder='total ascending')
@@ -77,9 +76,9 @@ def update_bar_bottom(province, metropolitan, target):
         dff = df_votes_dist[df_votes_dist[target]!=0]
     else:
         if metropolitan == 'All':
-            dff = df_votes_dist[(df_votes_dist['province'].isin(metro_province[province])) & (df_votes_dist[target]!=0)]
+            dff = df_votes_dist[(df_votes_dist['province'].isin(metro_province[province])) & (df_votes_dist[target]!=0) & (df_votes_dist[target].notnull())]
         else:
-            dff = df_votes_dist[(df_votes_dist['province']==metropolitan) & (df_votes_dist[target]!=0)]
+            dff = df_votes_dist[(df_votes_dist['province']==metropolitan) & (df_votes_dist[target]!=0) & (df_votes_dist[target].notnull())]
 
     if target == 'win_party':
         dff = dff.groupby(['win_party']).count()['district'].reset_index()
