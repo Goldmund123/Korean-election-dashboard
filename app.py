@@ -9,7 +9,7 @@ from graph import geo_plots, plots
 import pandas as pd
 from config import config
 from flask import Flask
-from flask_caching import backends, Cache
+from flask_caching import Cache
 
 server = Flask(__name__)
 server.secret_key ='test'
@@ -18,7 +18,7 @@ app = dash.Dash(name = __name__, server = server)
 cache = Cache(app.server, config={
     # try 'filesystem' if you don't want to setup redis
     'CACHE_TYPE': 'redis',
-    'CACHE_DEFAULT_TIMEOUT': None,
+    'CACHE_DEFAULT_TIMEOUT': 0,
     'CACHE_REDIS_URL': os.environ['REDISCLOUD_URL']
 })
 
