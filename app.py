@@ -9,7 +9,7 @@ from graph import geo_plots, plots
 import pandas as pd
 from config import config
 from flask import Flask
-# from flask_caching import backends, Cache
+from flask_caching import backends, Cache
 
 server = Flask(__name__)
 server.secret_key ='test'
