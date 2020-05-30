@@ -86,7 +86,7 @@ def panel_callback(province, metropolitan):
      Input('variable', 'value'),
      Input('highlow', 'value'),
     ])
-@cache.memoize()
+# @cache.memoize()
 def bar_callback(province, metropolitan, variable, option):
     if option == 'highest':
         return plots.update_bar_top(province, metropolitan, variable)
