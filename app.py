@@ -9,11 +9,10 @@ from graph import geo_plots, plots
 import pandas as pd
 from config import config
 from flask import Flask
-from flask_caching import backends, Cache
+# from flask_caching import backends, Cache
 
 server = Flask(__name__)
 server.secret_key ='test'
-#server.secret_key = os.environ.get('secret_key', 'secret')
 app = dash.Dash(name = __name__, server = server)
 
 backends.RedisCache(default_timeout=None)
@@ -123,4 +122,4 @@ def hist_callback(variables):
 
 # Main
 if __name__ == "__main__":
-    app.run_server(port=8050, debug=False)
+    app.run_server(port=8050, debug=True)

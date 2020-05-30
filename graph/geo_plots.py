@@ -58,8 +58,9 @@ def update_geo_graph(province, metropolitan, target):
                 hovertemplate='<b>%{customdata[1]}</b><br> Metropolitan: %{customdata[0]}<extra></extra>',
                 colorbar={
                         'outlinewidth': 0, 'tickvals': [0.125, 0.375, 0.625, 0.875],
-                        'ticktext': parties, 'thickness': 20, 'xanchor': 'right', 'yanchor': 'bottom',
-                        'x': 1.0, 'y': 0.0, 
+                        'ticktext': parties, 'thickness': 20, 
+                        'xanchor': 'right', 'yanchor': 'bottom',
+                        'x': 0.98, 'y': 0.03, 
                         'title': {'text': ''},
                         'len': 0.2, 'bgcolor':'rgba(255,255,255,0.6)'},
                 marker_opacity=0.8, 
@@ -77,8 +78,9 @@ def update_geo_graph(province, metropolitan, target):
                 hovertemplate='<b>%{customdata[1]}</b><br> Metropolitan: %{customdata[0]}<extra></extra>',
                 colorbar={
                         'outlinewidth': 0, 
-                        'len':0.4, 'thickness': 30, 'xanchor': 'right', 'yanchor': 'middle',
-                        'x': 1.0, 'y':0.5, 
+                        'len':0.4, 'thickness': 30, 
+                        'xanchor': 'right', 'yanchor': 'middle',
+                        'x': 0.98, 'y':0.5, 
                         'title': {'text': ''},
                         'bgcolor':'rgba(255,255,255,0.6)'},
                 marker_opacity=0.8, 
