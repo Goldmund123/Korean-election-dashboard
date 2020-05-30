@@ -42,9 +42,9 @@ def update_bar_top(province, metropolitan, target):
         dff = df_votes_dist[df_votes_dist[target]!=0]
     else:
         if metropolitan == 'All':
-            dff = df_votes_dist[(df_votes_dist['province'].isin(metro_province[province])) & (df_votes_dist[target]!=0.0) & (df_votes_dist[target].notnull())]
+            dff = df_votes_dist[df_votes_dist['province'].isin(metro_province[province])]
         else:
-            dff = df_votes_dist[(df_votes_dist['province']==metropolitan) & (df_votes_dist[target]!=0.0) & (df_votes_dist[target].notnull())]
+            dff = df_votes_dist[df_votes_dist['province']==metropolitan]
 
     if target == 'win_party':
         dff = dff.groupby(['win_party']).count()['district'].reset_index()
@@ -56,11 +56,15 @@ def update_bar_top(province, metropolitan, target):
         fig.update_layout(title=dict(text = 'Number of Winners by Party', x = 0.5, y=0.95))
         fig.update_layout(showlegend=True if province == 'Korea' else False)
     else:    
-        dff.sort_values(by=[target], ascending=False, inplace=True)
-        dff = dff.head(10)
+        dff = dff.sort_values(by=[target], ascending=False)
+        dff = dff.iloc[:10].sort_values(by=[target])
         color = 'province' if province == 'Korea' else None
         fig = px.bar(dff, x='district', y=target, opacity=0.6, color=color, template='plotly_white')
-        fig.update_xaxes(title='District', tickfont=dict(size=9), categoryorder='total ascending')
+        # categoryorder = total ascending generate weird x values that should not be included
+        if province == 'Korea':
+            fig.update_xaxes(title='District', tickfont=dict(size=9), categoryorder='total ascending')
+        else:
+            fig.update_xaxes(title='District', tickfont=dict(size=9))
         fig.update_yaxes(range=[min(dff[target]-0.01), max(dff[target])+0.01], tickfont=dict(size=9), title=' '.join(target.split('_')).capitalize())
         fig.update_layout(title=dict(text = 'Highest '+' '.join(target.split('_')).capitalize()+' rate by District', x = 0.5, y=0.95))
 
@@ -71,7 +75,7 @@ def update_bar_top(province, metropolitan, target):
     return fig
 
 def update_bar_bottom(province, metropolitan, target):
-    
+
     if province == 'Korea':
         dff = df_votes_dist[df_votes_dist[target]!=0]
     else:
@@ -89,15 +93,20 @@ def update_bar_bottom(province, metropolitan, target):
         fig.update_layout(title=dict(text = 'Number of Winners by Party', x = 0.5, y=0.95))
         fig.update_layout(showlegend=True if province == 'Korea' else False)
     else:
-        dff.sort_values(by=[target], inplace=True)
-        dff = dff.head(10)
+        dff = dff.sort_values(by=[target])
+        dff = dff.iloc[:10]
         color = 'province' if province == 'Korea' else None
         fig = px.bar(dff, x='district', y=target, opacity=0.6, color=color, template='plotly_white')
-        fig.update_xaxes(title='District', tickfont=dict(size=9), categoryorder='total ascending')
+        # categoryorder = total ascending generate weird x values that should not be included
+        if province == 'Korea':
+            fig.update_xaxes(title='District', tickfont=dict(size=9), categoryorder='total ascending')
+        else:
+            fig.update_xaxes(title='District', tickfont=dict(size=9))
         fig.update_yaxes(range=[min(dff[target]-0.01), max(dff[target])+0.01], tickfont=dict(size=9), title=' '.join(target.split('_')).capitalize())
         fig.update_layout(title=dict(text = 'Lowest '+' '.join(target.split('_')).capitalize()+' rate by District', x = 0.5, y=0.95))
 
-    fig.update_layout(legend=dict(xanchor='left', yanchor='middle', x=1.01, y=0.6))     
+    fig.update_layout(legend=dict(xanchor='left', yanchor='middle', x=1.01, y=0.6))  
+    fig.update_layout(margin={"b":10})
     fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)')
 
     return fig
