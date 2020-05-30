@@ -87,7 +87,7 @@ def update_bar_bottom(province, metropolitan, target):
     if target == 'win_party':
         dff = dff.groupby(['win_party']).count()['district'].reset_index()
         dff.columns = ['win_party', 'N_winners']
-        fig = px.bar(dff, x='N_winners', y='win_party', opacity=0.8, orientation='h', color='win_party', color_discrete_map=color_map, template='plotly_white')#, height=280)
+        fig = px.bar(dff, x='N_winners', y='win_party', opacity=0.6, orientation='h', color='win_party', color_discrete_map=color_map, template='plotly_white')#, height=280)
         fig.update_xaxes(title='Number of winners', tickfont=dict(size=9))
         fig.update_yaxes(tickfont=dict(size=9), title=' '.join(target.split('_')).capitalize(), categoryorder='total ascending')
         fig.update_layout(title=dict(text = 'Number of Winners by Party', x = 0.5, y=0.95))
